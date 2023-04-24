@@ -12,7 +12,7 @@ from django.dispatch import receiver
 from django.forms import DateField
 from rest_framework.authtoken.models import Token
 
-from app.models import Specification
+# from app.models import Specification
 
 TYPES = (
     ('Doctor','Doctor'),
@@ -26,8 +26,3 @@ class Account(AbstractUser):
     address                   = models.CharField(max_length=255, default="")
 	
     types                   = models.CharField(max_length=10, default="", choices=TYPES)
-
-
-class Doctor(model.Models):
-    user_id=models.OneToOneField(Account,on_delete=models.CASCADE)
-    spcificaton_id = models.ForeignKey(Specification, on_delete=models.CASCADE)

@@ -1,6 +1,6 @@
 import datetime
 from django.db import models
-from account.models import Account, Doctor
+from account.models import Account
 
 
 class Service(models.Model):
@@ -8,12 +8,18 @@ class Service(models.Model):
     discerption = models.TextField(max_length=255 , default='', null=True, blank=True )
     icon_path = models.ImageField(default=None, null=True, blank=True )
 
+
 class Specification(models.Model):
     service_id = models.ForeignKey(Service, on_delete=models.CASCADE)
  
     name = models.CharField(max_length=50 )
     discerption = models.TextField(max_length=255 , default='', null=True, blank=True )
     icon_path = models.ImageField(default=None, null=True, blank=True )
+
+
+class Doctor(models.Model):
+    user_id=models.OneToOneField(Account,on_delete=models.CASCADE)
+    spcificaton_id = models.ForeignKey(Specification, on_delete=models.CASCADE)
 
 
 class reserrations(models.Model):
