@@ -19,6 +19,12 @@ class SpecificationSerializer(serializers.ModelSerializer):
             'id','name','discerption','icon_path','service'
         ]
 
+class SpecificationSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model = Specification
+        fields = [
+            'id','name','discerption','icon_path','service_id'
+        ]
 
 class DoctorBusyTimeSerializer(serializers.ModelSerializer):
     from_date = serializers.DateTimeField(source='start_date', format="%H:%M %d-%m-%Y")
@@ -36,6 +42,7 @@ class DoctorSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault(),
         # read_only=True,
     )
+    spcificaton_id = SpecificationSerializer2(read_only=True)
 
     class Meta:
         model = Doctor

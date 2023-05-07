@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from datetime import timedelta
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -114,6 +115,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=2),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(hours=2),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
 REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
@@ -131,11 +137,6 @@ REST_FRAMEWORK = {
     ]}
 
 
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(weeks=2),
-    "REFRESH_TOKEN_LIFETIME": timedelta(weeks=2),
-    "AUTH_HEADER_TYPES": ("Bearer",),
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

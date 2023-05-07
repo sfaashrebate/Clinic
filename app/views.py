@@ -5,11 +5,11 @@ from  django_filters.rest_framework import(
     DjangoFilterBackend,
 )
 from rest_framework.filters import OrderingFilter
-
+from rest_framework.permissions import IsAuthenticated
 class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-    permission_classes = ['IsAuthenticated']
+    permission_classes = [IsAuthenticated]
     filter_backends = [OrderingFilter,DjangoFilterBackend,]
     filterset_fields =[
         'name',
@@ -18,7 +18,7 @@ class ServiceViewSet(viewsets.ModelViewSet):
 class SpecificationViewSet(viewsets.ModelViewSet):
     queryset = Specification.objects.all()
     serializer_class = SpecificationSerializer
-    permission_classes = ['IsAuthenticated']
+    permission_classes = [IsAuthenticated]
 
     filter_backends = [OrderingFilter,DjangoFilterBackend,]
     filterset_fields =[
@@ -31,7 +31,7 @@ class SpecificationViewSet(viewsets.ModelViewSet):
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-    permission_classes = ['IsAuthenticated']
+    permission_classes = [IsAuthenticated]
 
     filter_backends = [OrderingFilter,DjangoFilterBackend,]
     filterset_fields =[
