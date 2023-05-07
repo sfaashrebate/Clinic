@@ -21,7 +21,8 @@ class AccountSerializer(serializers.ModelSerializer):
             
         extra_kwargs = {
         'password': {'write_only': True},
-    }  
+    }
+
     def create(self, validated_data):
 
         password = validated_data['password']
@@ -29,4 +30,3 @@ class AccountSerializer(serializers.ModelSerializer):
         instance.set_password(password) # for encode the password
         obj = instance.save()
         return instance
-
