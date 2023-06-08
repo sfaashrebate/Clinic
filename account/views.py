@@ -25,5 +25,6 @@ def registration_view(request):
 def account_properties_view(request):
   account = request.user
   if request.method == 'GET':
+    
     serializer = AccountSerializer(instance=account)
     return Response(serializer.data)

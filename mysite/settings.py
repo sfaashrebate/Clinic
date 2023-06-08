@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from calendar import month
 from datetime import timedelta
-import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -115,11 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=2),
-    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(hours=2),
-    "AUTH_HEADER_TYPES": ("Bearer",),
-}
+# ************************************
 REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
@@ -136,6 +132,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]}
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(weeks=20),
+    "REFRESH_TOKEN_LIFETIME": timedelta(weeks=20),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
 
 
 # Internationalization

@@ -3,12 +3,15 @@ from django.db import models
 from account.models import Account
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class Service(models.Model):
     name = models.CharField(max_length=50 )
     discerption = models.TextField(max_length=255 , default='', null=True, blank=True )
     icon_path = models.ImageField(default=None, null=True, blank=True )
-
+    def __str__(self) -> str:
+        return self.name
 
 class Specification(models.Model):
     service_id = models.ForeignKey(Service, on_delete=models.CASCADE)
@@ -17,18 +20,28 @@ class Specification(models.Model):
     discerption = models.TextField(max_length=255 , default='', null=True, blank=True )
     icon_path = models.ImageField(default=None, null=True, blank=True )
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Doctor(models.Model):
-    # user_id=models.OneToOneField(Account,on_delete=models.CASCADE)
     doc_name =models.CharField(max_length=150)
     spcificaton_id = models.ForeignKey(Specification, on_delete=models.CASCADE)
-    # rate= models.IntegerField
+    rate= models.IntegerField(
+        default=1,
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5),
+        ]
+    )
 
+    def __str__(self) -> str:
+        return self.doc_name
 
 class Reservations(models.Model):
     description =models.CharField(max_length=150)
 
-    paitient_id = models.ForeignKey(Account, on_delete=models.CASCADE)
+    paitient_id = models.ForeignKey(Account, on_delete=models.CASCADE) #Account
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE)
 
     start_date=models.DateTimeField(auto_now_add=True)
@@ -37,21 +50,5 @@ class Reservations(models.Model):
     price=models.FloatField()
 
     def save(self, *args, **kwargs):
-        # if not self.end_date:
-        # self.end_date = self.start_date + datetime.timedelta(minutes=15)
+        self.end_date = self.start_date + datetime.timedelta(minutes=30)
         super().save(*args, **kwargs)
-
-
-@receiver(post_save, sender=Reservations)
-def set_end_date(sender, instance,created, **kwargs):
-    # if not instance.end_date:
-    if created:
-        instance.end_date = instance.start_date + datetime.timedelta(minutes=15)
-        instance.save()
-
-#cacluate the day with the
-# @proparity day
-# {
-# day:
-# from : 
-# to : }

@@ -16,7 +16,6 @@ class AccountSerializer(serializers.ModelSerializer):
             'phone',
             'notes',
             'address',
-            'types',
             ]
             
         extra_kwargs = {
@@ -26,7 +25,7 @@ class AccountSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
 
         password = validated_data['password']
-        instance =Account(**validated_data)
+        instance =User(**validated_data)
         instance.set_password(password) # for encode the password
         obj = instance.save()
         return instance
