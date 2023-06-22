@@ -41,6 +41,7 @@ urlpatterns = [
     path('registration/', registration_view),
     path('api/account/', include('account.urls')),
     path('api/app/', include('app.urls')),
+    path('api/app/', include('bmi.urls')),
 
     path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]

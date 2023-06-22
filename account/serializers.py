@@ -1,11 +1,13 @@
-from django.conf import settings
 from rest_framework import serializers
-from account.models import Account
+from account.models import GENDER_CHOICES, Account
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 class AccountSerializer(serializers.ModelSerializer):
+    weight = serializers.FloatField()
+    length = serializers.FloatField()
+    length = serializers.CharField()
 
     class Meta:
         model = User
@@ -17,6 +19,9 @@ class AccountSerializer(serializers.ModelSerializer):
             'phone',
             'notes',
             'address',
+            'weight',
+            'length',
+            'gender'
             ]
             
         extra_kwargs = {
