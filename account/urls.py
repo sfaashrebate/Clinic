@@ -1,6 +1,7 @@
 from django.urls import path, include
 from account.views import (
     AccountViewSet,
+    RegisterViewSet,
     registration_view,
     #account_properties_view,
 )
@@ -14,7 +15,8 @@ profile_router = DefaultRouter()
 profile_router.register('profile', AccountViewSet, basename='profile')
 
 urlpatterns = [
-    path('registration/', registration_view),
+    # path('registration/', registration_view),
+    path('registration/', RegisterViewSet.as_view(),name='registration'),
     path('', include(profile_router.urls),name='profile' ),
     # path('/', account_properties_view, name='token_refresh'),
 

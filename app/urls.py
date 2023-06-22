@@ -25,9 +25,9 @@ reservation_router.register('doctors-busy-times', DetailedDoctorViewSet, basenam
 
 
 urlpatterns = [
-    path('service', include(service_router.urls),name='service' ),
-    path('specification', include(specification_router.urls),name='specification' ),
-    path('doctor', include(doctor_router.urls),name='doctor' ),
-    path('reservation', include(reservation_router.urls),name='reservation' ),
+    path('service/', include(service_router.urls),name='service' ),
+    path('specification/', include(specification_router.urls),name='specification' ),
+    path('doctor/', include(doctor_router.urls),name='doctor' ),
+    path('reservation/', include(reservation_router.urls),name='reservation' ),
 
 ]

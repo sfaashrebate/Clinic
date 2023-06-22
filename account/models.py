@@ -10,6 +10,6 @@ class Account(AbstractUser):
     phone                   = models.CharField(max_length=10, default="0912345678", null=True, blank=True)
     notes                   = models.CharField(max_length=255, default="", null=True, blank=True)
     address                 = models.CharField(max_length=255, default="")
-    length                 = models.FloatField()
-    weight                 = models.FloatField()
+    length                 = models.FloatField(default=0.00)
+    weight                 = models.FloatField(default=0.00)
     gender                 = models.CharField(max_length=100, default="female",choices=GENDER_CHOICES)
