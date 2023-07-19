@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Feel free to alter this value to suit your needs.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        default='postgres://safaa:FSPEnPS2lQb7K2E2f11JWPHbtIBimXKr@dpg-cis24s15rnujejuej7ag-a/clinic_z2pr',
         conn_max_age=600
     )
 }
