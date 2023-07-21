@@ -1,5 +1,6 @@
 from django.urls import path, include
 from app.views import (
+    MyReservationViewSet,
     ServiceViewSet,
     SpecificationViewSet,
     DoctorViewSet,
@@ -21,13 +22,19 @@ doctor_router.register('', DoctorViewSet, basename='doctor')
 
 reservation_router = DefaultRouter()
 reservation_router.register('', ReservationViewSet, basename='reservation')
-reservation_router.register('doctors-busy-times', DetailedDoctorViewSet, basename='doctors-busy-times')
 
+doctors_busy_times = DefaultRouter()
+doctors_busy_times.register('', DetailedDoctorViewSet, basename='doctors-busy-times')
+
+myreservation_router = DefaultRouter()
+myreservation_router.register('', MyReservationViewSet, basename='myreservation')
 
 urlpatterns = [
     path('service/', include(service_router.urls),name='service' ),
     path('specification/', include(specification_router.urls),name='specification' ),
     path('doctor/', include(doctor_router.urls),name='doctor' ),
     path('reservation/', include(reservation_router.urls),name='reservation' ),
+    path('myreservation/', include(myreservation_router.urls),name='myreservation' ),
+    path('doctors-busy-times/', include(doctors_busy_times.urls),name='reservation' ),
 
 ]

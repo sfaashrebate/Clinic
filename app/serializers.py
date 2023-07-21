@@ -61,7 +61,7 @@ class ReservationSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 class DoctorSerializer(serializers.ModelSerializer):
-    spcificaton_details = SpecificationSerializer(source='spcificaton_id',read_only=True)
+    spcificaton_details = SpecificationSerializer(read_only=True,source='spcificaton_id')
 
     class Meta:
         model = Doctor
@@ -103,3 +103,37 @@ class DetailedDoctorSerializer(serializers.ModelSerializer):
         serializer = DoctorBusyTimeSerializer(reservations, many=True)
         print(serializer.data)
         return serializer.data # dict
+
+
+class MyReservationSerializer(serializers.ModelSerializer):
+    from_date = serializers.DateTimeField(
+        source='start_date',
+        format="%H:%M %d-%m-%Y",
+        read_only=True,
+    )
+    to_date = serializers.DateTimeField(
+        source='end_date',
+        format="%H:%M %d-%m-%Y",
+        read_only=True,
+    )
+    current_user= serializers.CurrentUserDefault()
+    paitient_id = serializers.PrimaryKeyRelatedField(
+            read_only= True
+    )
+    class Meta:
+        model = Reservations
+        fields =[
+            'id',
+            'description',
+            'paitient_id',
+            'doctor_id',
+            'from_date',
+            'to_date',
+            'price',
+        ]
+
+    def to_representation(self, instance):
+        print(instance)
+        # patient = 
+        # print(patient)
+        return super().to_representation(instance)

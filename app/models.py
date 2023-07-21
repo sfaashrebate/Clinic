@@ -44,8 +44,8 @@ class Reservations(models.Model):
     paitient_id = models.ForeignKey(Account, on_delete=models.CASCADE) #Account
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE)
 
-    start_date=models.DateTimeField(auto_now_add=True)
-    end_date=models.DateTimeField(default= datetime.datetime.now(), blank=True )# will be calculated
+    start_date=models.DateTimeField()
+    end_date=models.DateTimeField(blank=True )# will be calculated
 
     price=models.FloatField()
 

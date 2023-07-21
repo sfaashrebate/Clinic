@@ -1,7 +1,12 @@
 from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework import mixins
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.decorators import action
+
 from app.models import Reservations, Service, Specification,Doctor
 from app.serializers import (
+    MyReservationSerializer,
     ServiceSerializer,#
 
     DetailedSpecificationSerializer,
@@ -55,17 +60,37 @@ class DoctorViewSet(viewsets.ModelViewSet):
     ]
 
 
-class DetailedDoctorViewSet(viewsets.ReadOnlyModelViewSet):
+class DetailedDoctorViewSet(
+    GenericViewSet
+):
     queryset = Doctor.objects.all()
     serializer_class =DetailedDoctorSerializer
     permission_classes = [IsAuthenticated]
-
+    lookup_field = 'pk'
     filter_backends = [OrderingFilter,DjangoFilterBackend,]
     filterset_fields =[
         'id',
         'doc_name',
     ]
-    
+    @action(detail=True)
+    def get_doctors_busy_times(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+    @action(detail=False)
+    def list_doctors_busy_times(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservations.objects.all()
     serializer_class =ReservationSerializer
@@ -84,6 +109,30 @@ class ReservationViewSet(viewsets.ModelViewSet):
         queryset = self.filter_queryset(
             self.get_queryset().filter(paitient_id=user)
         )
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class MyReservationViewSet(
+    GenericViewSet):
+
+    queryset = Reservations.objects.all()
+    serializer_class =MyReservationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def filter_queryset(self, queryset):
+        queryset = self.get_queryset().filter(paitient_id = self.request.user)
+        return super().filter_queryset(queryset)
+
+    @action(detail=False)
+    def list_myreservation(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
 
         page = self.paginate_queryset(queryset)
         if page is not None:
