@@ -72,13 +72,13 @@ class DetailedDoctorViewSet(
         'id',
         'doc_name',
     ]
-    @action(detail=True)
+    @action(url_path='retrieve',detail=True)
     def get_doctors_busy_times(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
-    @action(detail=False)
+    @action(url_path='list',detail=False)
     def list_doctors_busy_times(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
@@ -131,7 +131,7 @@ class MyReservationViewSet(
         return super().filter_queryset(queryset)
 
     @action(detail=False)
-    def list_myreservation(self, request, *args, **kwargs):
+    def myreservation(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
         page = self.paginate_queryset(queryset)
