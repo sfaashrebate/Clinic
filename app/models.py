@@ -34,6 +34,7 @@ class Doctor(models.Model):
             MaxValueValidator(5),
         ]
     )
+    price=models.FloatField()
 
     def __str__(self) -> str:
         return self.doc_name
@@ -47,7 +48,6 @@ class Reservations(models.Model):
     start_date=models.DateTimeField()
     end_date=models.DateTimeField(blank=True )# will be calculated
 
-    price=models.FloatField()
 
 # pre_save signal using decorator
 @receiver(pre_save, sender=Reservations)

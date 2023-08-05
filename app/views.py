@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework import mixins
+from rest_framework import mixins,generics
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import action
 
@@ -57,6 +57,7 @@ class DoctorViewSet(viewsets.ModelViewSet):
         'spcificaton_id',
         'spcificaton_id__name',
         'rate',
+        'price',
     ]
 
 
@@ -101,7 +102,6 @@ class ReservationViewSet(viewsets.ModelViewSet):
         'doctor_id',
         'doctor_id__doc_name',
         'doctor_id__spcificaton_id__name',
-        'price',
     ]
 
     def list_patient_reservation(self, request, *args, **kwargs):
@@ -119,9 +119,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class MyReservationViewSet(
-    GenericViewSet):
-
+class MyReservationViewSet( generics.GenericAPIView):
     queryset = Reservations.objects.all()
     serializer_class =MyReservationSerializer
     permission_classes = [IsAuthenticated]
@@ -130,7 +128,7 @@ class MyReservationViewSet(
         queryset = self.get_queryset().filter(paitient_id = self.request.user)
         return super().filter_queryset(queryset)
 
-    @action(detail=False)
+    # @action(detail=False,url_path='myreservation',methods=['GET'])
     def myreservation(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
