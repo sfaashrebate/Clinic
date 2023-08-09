@@ -4,10 +4,10 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class AccountSerializer(serializers.ModelSerializer):
-    weight = serializers.FloatField()
-    length = serializers.FloatField()
-    length = serializers.CharField()
+    weight = serializers.FloatField(default=0.00)
+    length = serializers.FloatField(default=0.00)
 
     class Meta:
         model = User
@@ -22,16 +22,15 @@ class AccountSerializer(serializers.ModelSerializer):
             'weight',
             'length',
             'gender'
-            ]
-            
+        ]
+
         extra_kwargs = {
-        'password': {'write_only': True},
-    }
+            'password': {'write_only': True},
+        }
 
     def create(self, validated_data):
-
         password = validated_data['password']
-        instance =User(**validated_data)
-        instance.set_password(password) # for encode the password
-        obj = instance.save()
+        instance = User(**validated_data)
+        instance.set_password(password)  # for encode the password
+        instance.save()
         return instance

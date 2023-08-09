@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'app',
     'bmi',
+    'filesmanager',
 ]
 AUTH_USER_MODEL = 'account.Account'
 
