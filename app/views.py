@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework import mixins
+from rest_framework import mixins,generics
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import action
 
@@ -58,6 +58,7 @@ class DoctorViewSet(viewsets.ModelViewSet):
         'spcificaton_id',
         'spcificaton_id__name',
         'rate',
+        'price',
     ]
 
 
@@ -114,7 +115,6 @@ class ReservationViewSet(viewsets.ModelViewSet):
         'doctor_id',
         'doctor_id__doc_name',
         'doctor_id__spcificaton_id__name',
-        'price',
     ]
 
     def list_patient_reservation(self, request, *args, **kwargs):

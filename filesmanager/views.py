@@ -13,6 +13,9 @@ class FileUploadViewSet(ModelViewSet):
 
 
 class TestViewSet(ModelViewSet):
+    """
+    file -> id of file object.
+    """
     queryset= TestModel.objects.all()
     serializer_class = TestSerializer
 

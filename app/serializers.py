@@ -57,7 +57,6 @@ class ReservationSerializer(serializers.ModelSerializer):
             'doctor_id',
             'from_date',
             'to_date',
-            'price',
         ]
 
     def create(self, validated_data):
@@ -77,6 +76,7 @@ class DoctorSerializer(serializers.ModelSerializer):
             'doc_name',
             'spcificaton_id',
             'spcificaton_details',
+            'price',
         )
 
 
@@ -141,5 +141,4 @@ class MyReservationSerializer(serializers.ModelSerializer):
             'doctor_id',
             'from_date',
             'to_date',
-            'price',
         ]

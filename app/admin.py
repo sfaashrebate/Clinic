@@ -12,7 +12,7 @@ class SpecificationAdmin(admin.ModelAdmin):
 
 
 class DoctorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'doc_name', 'spcificaton_id', 'rate')
+    list_display = ('id', 'doc_name', 'spcificaton_id', 'rate', 'price')
 
 
 class ReservationsAdmin(admin.ModelAdmin):
