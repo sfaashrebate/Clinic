@@ -4,4 +4,4 @@ from filesmanager.models import Media,TestModel
 
 # Register your models here.
 admin.site.register(Media)
-admin.site.register(TestModel)from django.contrib import admin
+admin.site.register(TestModel)
