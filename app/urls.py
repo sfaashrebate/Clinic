@@ -35,6 +35,7 @@ urlpatterns = [
     path('doctor/', include(doctor_router.urls),name='doctor' ),
     path('reservation/', include(reservation_router.urls),name='reservation' ),
     path('myreservation/', include(myreservation_router.urls),name='myreservation' ),
+
     path('doctors-busy-times/', include(doctors_busy_times.urls),name='reservation' ),
 
 ]

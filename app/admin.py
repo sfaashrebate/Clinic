@@ -14,12 +14,9 @@ class SpecificationAdmin(admin.ModelAdmin):
 class DoctorAdmin(admin.ModelAdmin):
     list_display = ('id', 'doc_name', 'spcificaton_id', 'rate', 'price')
 
-
 class ReservationsAdmin(admin.ModelAdmin):
     list_display = ('id', 'description', 'paitient_id',
                     'doctor_id', 'start_date', 'end_date', 'price')
-
-
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Specification, SpecificationAdmin)
 admin.site.register(Doctor, DoctorAdmin)
