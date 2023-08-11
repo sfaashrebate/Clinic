@@ -34,7 +34,8 @@ urlpatterns = [
     path('specification/', include(specification_router.urls),name='specification' ),
     path('doctor/', include(doctor_router.urls),name='doctor' ),
     path('reservation/', include(reservation_router.urls),name='reservation' ),
-    path('reservation/myreservation',MyReservationViewSet.as_view(),name='myreservation' ),
+    path('myreservation/', include(myreservation_router.urls),name='myreservation' ),
+
     path('doctors-busy-times/', include(doctors_busy_times.urls),name='reservation' ),
 
 ]
