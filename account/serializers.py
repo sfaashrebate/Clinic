@@ -3,11 +3,6 @@ from account.models import GENDER_CHOICES, Account
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-for i in User.objects.all():
-    print(i.username)
-    print(i.password)
-    print()
-
 
 class AccountSerializer(serializers.ModelSerializer):
     weight = serializers.FloatField(default=0.00)
