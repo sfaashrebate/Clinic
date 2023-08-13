@@ -8,6 +8,7 @@ for i in User.objects.all():
     print(i.password)
     print()
 
+
 class AccountSerializer(serializers.ModelSerializer):
     weight = serializers.FloatField(default=0.00)
     length = serializers.FloatField(default=0.00)
@@ -32,6 +33,13 @@ class AccountSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        password = validated_data['password']
+        instance = User(**validated_data)
+        instance.set_password(password)  # for encode the password
+        instance.save()
+        return instance
+
+    def update(self, validated_data):
         password = validated_data['password']
         instance = User(**validated_data)
         instance.set_password(password)  # for encode the password
