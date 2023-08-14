@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from account.models import GENDER_CHOICES, Account
+# from account.models import GENDER_CHOICES, Account
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
