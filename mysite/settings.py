@@ -104,11 +104,11 @@ DATABASES = {
 }
 
 
-DATABASES = {
-    'default': dj_database_url.parse(
-        'postgres://sfaa:UfIkjV5njFkF7hQ6s72VY9Q5W77y3TPA@dpg-citk6ip5rnuhcnp8igtg-a.singapore-postgres.render.com/clinic_f7ok'
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.parse(
+#         'postgres://sfaa:UfIkjV5njFkF7hQ6s72VY9Q5W77y3TPA@dpg-citk6ip5rnuhcnp8igtg-a.singapore-postgres.render.com/clinic_f7ok'
+#     )
+# }
 
 # DATABASES = {
 #     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))

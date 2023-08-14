@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes, parser_classes
-from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.parsers import FormParser, MultiPartParser,JSONParser
 from rest_framework.permissions import IsAuthenticated
 from account.serializers import AccountSerializer
 from account.models import Account
@@ -64,4 +64,4 @@ class AccountViewSet(
     serializer_class = AccountSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'username'
-    parser_classes = [MultiPartParser,]
+    parser_classes = [MultiPartParser,FormParser,JSONParser]
