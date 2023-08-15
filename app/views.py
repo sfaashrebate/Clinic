@@ -143,7 +143,7 @@ class MyReservationViewSet(
         queryset = self.get_queryset().filter(paitient_id=self.request.user)
         return super().filter_queryset(queryset)
 
-    @action(url_path='', url_name='myreservation', detail=False)
+    @action(url_path='myreservation', url_name='myreservation', detail=False)
     def myreservation(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 

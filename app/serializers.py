@@ -131,7 +131,7 @@ class MyReservationSerializer(serializers.ModelSerializer):
     paitient_id = serializers.PrimaryKeyRelatedField(
         read_only=True
     )
-
+    doctor_details =DoctorSerializer(source='doctor_id', read_only=True)
     class Meta:
         model = Reservations
         fields = [
@@ -139,6 +139,7 @@ class MyReservationSerializer(serializers.ModelSerializer):
             'description',
             'paitient_id',
             'doctor_id',
+            'doctor_details',
             'from_date',
             'to_date',
         ]

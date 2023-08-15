@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'bmi',
     'filesmanager',
 ]
-AUTH_USER_MODEL = 'account.Account'
 
 MIDDLEWARE = [
     
@@ -97,19 +96,19 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
 DATABASES = {
-    'default': dj_database_url.parse(
-        'postgres://sfaa:UfIkjV5njFkF7hQ6s72VY9Q5W77y3TPA@dpg-citk6ip5rnuhcnp8igtg-a.singapore-postgres.render.com/clinic_f7ok'
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+
+# DATABASES = {
+#     'default': dj_database_url.parse(
+#         'postgres://sfaa:UfIkjV5njFkF7hQ6s72VY9Q5W77y3TPA@dpg-citk6ip5rnuhcnp8igtg-a.singapore-postgres.render.com/clinic_f7ok'
+#     )
+# }
 
 # DATABASES = {
 #     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -197,3 +196,4 @@ if DEBUG:
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+AUTH_USER_MODEL = 'account.Account'
