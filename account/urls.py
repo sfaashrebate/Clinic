@@ -1,6 +1,7 @@
 from django.urls import path, include
 from account.views import (
     AccountViewSet,
+    PasswordView,
     RegisterViewSet,
     registration_view,
     #account_properties_view,
@@ -19,6 +20,7 @@ urlpatterns = [
     path('registration/', RegisterViewSet.as_view(),name='registration'),
     path('', include(profile_router.urls),name='profile' ),
     # path('/', account_properties_view, name='token_refresh'),
+    path('profile/reset-password/<str:username>/', PasswordView.as_view({'patch':'update'}), name='profile'),
 
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

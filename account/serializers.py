@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from account.models import GENDER_CHOICES, Account
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import check_password
 
 User = get_user_model()
 
@@ -8,7 +9,6 @@ User = get_user_model()
 class AccountSerializer(serializers.ModelSerializer):
     weight = serializers.FloatField(default=0.00)
     length = serializers.FloatField(default=0.00)
-    # password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
@@ -37,11 +37,46 @@ class AccountSerializer(serializers.ModelSerializer):
         return instance
 
     def update(self, instance, validated_data):
-        instance = super().update(instance, validated_data)
         password = validated_data.get('password',None)
         if password:
+            password = validated_data.pop('password')
+        instance = super().update(instance, validated_data)
+        return instance
+
+
+
+class PasswordSerializer(serializers.ModelSerializer):
+    old_password = serializers.CharField(source= "password",write_only=True)
+    new_password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'old_password',
+            'new_password',
+        ]
+
+        extra_kwargs = {
+            'old_password': {'write_only': True},
+            'new_password': {'write_only': True},
+        }
+
+    def update(self, instance, validated_data):
+        print(validated_data)
+        old_password = validated_data.get('password',None)
+        new_password = validated_data.get('new_password',None)
+        print(instance.password)
+        print(old_password)
+        print(check_password(old_password, instance.password))
+        if check_password(old_password, instance.password):
             print('sssss')
-            instance.set_password(password)  # for encode the password
+            instance.set_password(new_password)  # for encode the password
             print(instance.password)
-            instance.save()
+            print(new_password)
+            # instance.save()/
+        else:
+            raise serializers.ValidationError('please enter your correct password')
+
+        instance = super().update(instance, validated_data)
         return instance
