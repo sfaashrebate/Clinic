@@ -69,12 +69,16 @@ class PasswordSerializer(serializers.ModelSerializer):
         print('pass before reset', instance.password)
         print(old_password)
         print(check_password(old_password ,instance.password))
-        if (old_password ==instance.password):
+        if check_password(old_password ,instance.password):
             print('sssss')
             instance.set_password(new_password)  # for encode the password
+            print('pass after reset' ,instance.password)
         else:
             raise serializers.ValidationError('please enter your correct password')
-        print('pass after reset' ,instance.password)
 
         instance = super().update(instance, validated_data)
         return instance
+
+    def to_representation(self, instance):
+
+        return {'response':'success'}
