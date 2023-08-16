@@ -64,19 +64,17 @@ class PasswordSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         print(validated_data)
-        old_password = validated_data.get('password',None)
-        new_password = validated_data.get('new_password',None)
-        print(instance.password)
+        old_password = validated_data.pop('password')
+        new_password = validated_data.pop('new_password')
+        print('pass before reset', instance.password)
         print(old_password)
-        print(check_password(old_password, instance.password))
-        if check_password(old_password, instance.password):
+        print(check_password(old_password ,instance.password))
+        if (old_password ==instance.password):
             print('sssss')
             instance.set_password(new_password)  # for encode the password
-            print(instance.password)
-            print(new_password)
-            # instance.save()/
         else:
             raise serializers.ValidationError('please enter your correct password')
+        print('pass after reset' ,instance.password)
 
         instance = super().update(instance, validated_data)
         return instance
