@@ -32,7 +32,7 @@ class RegisterViewSet(generics.GenericAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     permission_classes = []
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser,JSONParser]
 
     def post(self, request, *args, **kwargs):
         serializer = AccountSerializer(data=request.data)

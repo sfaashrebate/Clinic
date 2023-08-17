@@ -22,7 +22,8 @@ class AccountSerializer(serializers.ModelSerializer):
             'address',
             'weight',
             'length',
-            'gender'
+            'gender',
+            'profile_pic',
         ]
 
         extra_kwargs = {

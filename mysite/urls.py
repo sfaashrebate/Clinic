@@ -41,7 +41,7 @@ urlpatterns = [
     path('api/account/', include('account.urls')),
     path('api/', include('app.urls')),
     path('api/bmi/', include('bmi.urls')),
-    # path('api/files/', include('filesmanager.urls')),
+    path('api/', include('filesmanager.urls')),
 
     path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]

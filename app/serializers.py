@@ -77,6 +77,7 @@ class DoctorSerializer(serializers.ModelSerializer):
             'spcificaton_id',
             'spcificaton_details',
             'price',
+            'profile_pic',
         )
 
 
