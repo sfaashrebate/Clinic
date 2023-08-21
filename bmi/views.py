@@ -5,7 +5,7 @@ from account.serializers import AccountSerializer
 from account.models import Account
 from rest_framework.generics import GenericAPIView
 from rest_framework import mixins
-from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import MultiPartParser,FormParser,JSONParser
 
 from bmi.serializers import BMISerializer
 
@@ -14,7 +14,7 @@ class BmiViewSet(GenericAPIView):
     queryset = Account.objects.all()
     serializer_class = BMISerializer
     permission_classes = [IsAuthenticated]
-    parser_classes = [MultiPartParser,]
+    parser_classes = [MultiPartParser, FormParser,JSONParser]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
