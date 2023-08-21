@@ -58,11 +58,6 @@ class PasswordSerializer(serializers.ModelSerializer):
             'new_password',
         ]
 
-        extra_kwargs = {
-            'old_password': {'write_only': True},
-            'new_password': {'write_only': True},
-        }
-
     def update(self, instance, validated_data):
         print(validated_data)
         old_password = validated_data.pop('password')

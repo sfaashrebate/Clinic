@@ -12,7 +12,8 @@ class Service(models.Model):
     name = models.CharField(max_length=50)
     discerption = models.TextField(
         max_length=255, default='', null=True, blank=True)
-    icon_path = models.ImageField(default=None, null=True, blank=True)
+    icon_path =  models.OneToOneField(
+        Media, on_delete=models.CASCADE, default=None, null=True)
 
     def __str__(self) -> str:
         return self.name
@@ -24,7 +25,9 @@ class Specification(models.Model):
     name = models.CharField(max_length=50)
     discerption = models.TextField(
         max_length=255, default='', null=True, blank=True)
-    icon_path = models.ImageField(default=None, null=True, blank=True)
+    icon_path =  models.OneToOneField(
+        Media, on_delete=models.CASCADE, default=None, null=True)
+
 
     def __str__(self) -> str:
         return self.name
@@ -40,7 +43,7 @@ class Doctor(models.Model):
             MaxValueValidator(5),
         ]
     )
-    price = models.FloatField()
+    price = models.IntegerField()
     profile_pic = models.OneToOneField(
         Media, on_delete=models.CASCADE, default=None, null=True)
 
