@@ -17,6 +17,6 @@ class Media(models.Model):
             validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg', 'png'])]
     )
 
-class TestModel(models.Model):
-    test = models.CharField(max_length=255,default='')
-    file = models.OneToOneField(Media, on_delete= models.CASCADE)
+# class TestModel(models.Model):
+#     test = models.CharField(max_length=255,default='')
+#     file = models.OneToOneField(Media, on_delete= models.CASCADE)

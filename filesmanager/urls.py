@@ -1,5 +1,5 @@
 from django.urls import path, include
-from filesmanager.views import FileUploadViewSet,TestViewSet
+from filesmanager.views import FileUploadViewSet#,TestViewSet
 from rest_framework.routers import DefaultRouter
 
 file_router = DefaultRouter()

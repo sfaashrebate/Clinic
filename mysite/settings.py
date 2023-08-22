@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # 'corsheaders',
     'drf_yasg',
     'django_filters',
+    'django_extensions',
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -175,7 +176,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR /"staticfiles/"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT ="/media/"
+MEDIA_ROOT =os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -197,3 +198,7 @@ if DEBUG:
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AUTH_USER_MODEL = 'account.Account'
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
