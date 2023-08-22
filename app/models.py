@@ -13,7 +13,7 @@ class Service(models.Model):
     discerption = models.TextField(
         max_length=255, default='', null=True, blank=True)
     icon_path =  models.OneToOneField(
-        Media, on_delete=models.CASCADE, default=None, null=True)
+        Media, on_delete=models.CASCADE, default=None, null=True,blank=True)
 
     def __str__(self) -> str:
         return self.name
@@ -26,7 +26,7 @@ class Specification(models.Model):
     discerption = models.TextField(
         max_length=255, default='', null=True, blank=True)
     icon_path =  models.OneToOneField(
-        Media, on_delete=models.CASCADE, default=None, null=True)
+        Media, on_delete=models.CASCADE, default=None, null=True,blank=True)
 
 
     def __str__(self) -> str:
