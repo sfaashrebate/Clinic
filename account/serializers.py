@@ -31,10 +31,13 @@ class AccountSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        print(validated_data)
         password = validated_data['password']
         instance = User(**validated_data)
         instance.set_password(password)  # for encode the password
         instance.save()
+        print(instance.password)
+        print(check_password(password ,instance.password))
         return instance
 
     def update(self, instance, validated_data):
