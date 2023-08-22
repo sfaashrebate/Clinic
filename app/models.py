@@ -12,8 +12,8 @@ class Service(models.Model):
     name = models.CharField(max_length=50)
     discerption = models.TextField(
         max_length=255, default='', null=True, blank=True)
-    icon_path =  models.OneToOneField(
-        Media, on_delete=models.CASCADE, default=None, null=True,blank=True)
+    # icon_path =  models.OneToOneField(
+    #     Media, on_delete=models.CASCADE, default=None, null=True,blank=True)
 
     def __str__(self) -> str:
         return self.name
@@ -25,8 +25,8 @@ class Specification(models.Model):
     name = models.CharField(max_length=50)
     discerption = models.TextField(
         max_length=255, default='', null=True, blank=True)
-    icon_path =  models.OneToOneField(
-        Media, on_delete=models.CASCADE, default=None, null=True,blank=True)
+    # icon_path =  models.OneToOneField(
+    #     Media, on_delete=models.CASCADE, default=None, null=True,blank=True)
 
 
     def __str__(self) -> str:
