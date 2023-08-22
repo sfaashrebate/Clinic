@@ -1,4 +1,4 @@
-from asyncore import write
+from asyncore import read, write
 from enum import Enum
 from random import choices
 from django.conf import settings
@@ -16,6 +16,12 @@ class BMICategory(Enum):
     OVERWEIGHT = "Overweight"
     OBESE = "Obese"
 
+BMI_DICT = {
+    'نحيف جدا':'ننصحك باتباع نظام غذائي لزيادة الوزن',
+    'وزن طبيعي':'وزن طبيعي يجب المحافظة عليه',
+    'وزن زائد':'ننصحك باتباع نظام غذائي لانقاص الوزن',
+    'وزن زائد جدا':'ننصحك باتباع نظام غذائي صارم',
+}
 
 def calculate_bmi(weight, height, gender):
     """Calculate BMI based on weight, height and gender"""
@@ -28,22 +34,22 @@ def calculate_bmi(weight, height, gender):
     # BMI ranges
     if gender == "male":
         if bmi < 18.5:
-            return 'Underweight' #BMICategory.UNDERWEIGHT 
+            return 'نحيف جدا' #BMICategory.UNDERWEIGHT 
         elif 18.5 <= bmi < 25:
-            return 'Normal weight' #BMICategory.NORMAL
+            return 'وزن طبيعي' #BMICategory.NORMAL
         elif 25 <= bmi < 30:
-            return 'Overweight'#BMICategory.OVERWEIGHT
+            return 'وزن زائد'#BMICategory.OVERWEIGHT
         else:
-            return 'Obese'#BMICategory.OBESE
+            return 'وزن زائد جدا'#BMICategory.OBESE
     else:
         if bmi < 18.5:
-            return 'Underweight' #BMICategory.UNDERWEIGHT 
+            return 'نحيف جدا' #BMICategory.UNDERWEIGHT 
         elif 18.5 <= bmi < 24:
-            return 'Normal weight' #BMICategory.NORMAL
+            return 'وزن طبيعي' #BMICategory.NORMAL
         elif 24 <= bmi < 29:
-            return 'Overweight'#BMICategory.OVERWEIGHT
+            return 'وزن زائد'#BMICategory.OVERWEIGHT
         else:
-            return 'Obese'#BMICategory.OBESE
+            return 'وزن زائد جدا'#BMICategory.OBESE
 
 
 class BMISerializer(serializers.Serializer):
@@ -51,7 +57,7 @@ class BMISerializer(serializers.Serializer):
     height = serializers.FloatField(write_only=True)
     gender = serializers.ChoiceField(choices=GENDER_CHOICES,write_only=True)
     bmi_result = serializers.SerializerMethodField(read_only =True)
-
+    
     class Meta:
         fields = [
             'weight',
@@ -67,3 +73,10 @@ class BMISerializer(serializers.Serializer):
             obj['gender'],
         )
         return bmi_result
+
+    def to_representation(self, instance):
+        ret =  super().to_representation(instance)
+        bmi_result = ret['bmi_result']
+        ret['advice_message']= BMI_DICT[bmi_result]
+        return ret
+        

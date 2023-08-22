@@ -13,7 +13,7 @@ from bmi.serializers import BMISerializer
 class BmiViewSet(GenericAPIView):
     queryset = Account.objects.all()
     serializer_class = BMISerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     parser_classes = [MultiPartParser, FormParser,JSONParser]
 
     def post(self, request, *args, **kwargs):
