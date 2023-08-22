@@ -10,7 +10,6 @@ class FileUploadViewSet(ModelViewSet):
     queryset = Media.objects.all()
     serializer_class = FileUploadSerializer
     parser_classes = [MultiPartParser,]
-    permission_classes = [IsAuthenticated]
 
 # class TestViewSet(ModelViewSet):
 #     """
